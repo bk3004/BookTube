@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { Header } from "@/components/header";
 import { Sidebar } from "@/components/sidebar";
 import { VideoGrid } from "@/components/video-grid";
@@ -10,11 +10,6 @@ export function HomeShell() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [activeItem, setActiveItem] = useState("Home");
   const [activeFilter, setActiveFilter] = useState<Filter>("All");
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
-
-  useEffect(() => {
-    document.documentElement.classList.toggle("theme-light", theme === "light");
-  }, [theme]);
 
   const videos = useMemo(() => {
     if (activeFilter === "All") return VIDEOS;
@@ -23,10 +18,7 @@ export function HomeShell() {
 
   return (
     <div className="min-h-full bg-[var(--page-bg)]">
-      <Header
-        onMenuClick={() => setSidebarOpen((open) => !open)}
-        onThemeClick={() => setTheme((value) => (value === "dark" ? "light" : "dark"))}
-      />
+      <Header onMenuClick={() => setSidebarOpen((open) => !open)} />
       {sidebarOpen ? (
         <button
           type="button"

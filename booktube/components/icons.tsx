@@ -46,6 +46,28 @@ export function ThemeIcon({ className }: IconProps) {
   );
 }
 
+export function SunIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
+      <path
+        fill="currentColor"
+        d="M12 7.4A4.6 4.6 0 1 1 7.4 12 4.6 4.6 0 0 1 12 7.4ZM11.2 2h1.6v3.2h-1.6V2Zm0 16.8h1.6V22h-1.6v-3.2ZM2 11.2h3.2v1.6H2v-1.6Zm16.8 0H22v1.6h-3.2v-1.6ZM4.7 4.7l1.1-1.1 2.3 2.3-1.1 1.1-2.3-2.3Zm11.2 11.2 1.1-1.1 2.3 2.3-1.1 1.1-2.3-2.3ZM18.2 3.6l1.1 1.1-2.3 2.3-1.1-1.1 2.3-2.3ZM7 14.8l1.1 1.1-2.3 2.3-1.1-1.1 2.3-2.3Z"
+      />
+    </svg>
+  );
+}
+
+export function MoonIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
+      <path
+        fill="currentColor"
+        d="M12.8 3.2A8.4 8.4 0 1 0 20 14.6 7.2 7.2 0 0 1 12.8 3.2Z"
+      />
+    </svg>
+  );
+}
+
 export function PlusIcon({ className }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" className={className} aria-hidden="true">

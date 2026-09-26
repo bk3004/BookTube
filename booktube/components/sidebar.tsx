@@ -58,7 +58,7 @@ const GENRE_ITEMS = [
 export function Sidebar({ open, activeItem, onNavigate }: SidebarProps) {
   return (
     <aside
-      className={`fixed bottom-0 left-0 top-14 z-20 overflow-y-auto border-r border-[#272727] bg-[var(--page-bg)] pb-8 transition-[width,transform] duration-200 ${
+      className={`fixed bottom-0 left-0 top-14 z-20 overflow-y-auto border-r border-[var(--page-border)] bg-[var(--page-bg)] pb-8 transition-[width,transform] duration-200 ${
         open ? "w-[240px] translate-x-0" : "w-[240px] -translate-x-full md:w-[72px] md:translate-x-0"
       }`}
     >
@@ -131,11 +131,11 @@ function SectionLabel({
   compact: boolean;
 }) {
   if (compact) {
-    return <div className="mx-2 my-3 border-t border-[#272727]" />;
+    return <div className="mx-2 my-3 border-t border-[var(--page-border)]" />;
   }
 
   return (
-    <p className="mb-1.5 mt-4 px-3 text-[13px] font-medium uppercase tracking-[0.08em] text-[#aaa]">
+    <p className="mb-1.5 mt-4 px-3 text-[13px] font-medium uppercase tracking-[0.08em] text-[var(--page-muted)]">
       {children}
     </p>
   );
@@ -156,11 +156,11 @@ function NavButton({
   onClick?: () => void;
   href?: string;
 }) {
-  const className = `flex w-full items-center text-left text-[14px] text-[#f1f1f1] hover:bg-[#272727] ${
+  const className = `flex w-full items-center text-left text-[14px] text-[var(--page-text)] hover:bg-[var(--page-raised)] ${
     compact
       ? "h-[74px] flex-col justify-center gap-1.5 rounded-xl px-1 text-[10px]"
       : "h-10 gap-6 rounded-full px-3"
-  } ${active ? "bg-[#272727] font-medium" : "font-normal"}`;
+  } ${active ? "bg-[var(--page-raised)] font-medium" : "font-normal"}`;
 
   const content = (
     <>

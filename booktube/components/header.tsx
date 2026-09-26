@@ -6,15 +6,14 @@ import {
   MicIcon,
   PlusIcon,
   SearchIcon,
-  ThemeIcon,
 } from "@/components/icons";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 type HeaderProps = {
   onMenuClick: () => void;
-  onThemeClick: () => void;
 };
 
-export function Header({ onMenuClick, onThemeClick }: HeaderProps) {
+export function Header({ onMenuClick }: HeaderProps) {
   return (
     <header className="sticky top-0 z-30 flex h-14 items-center justify-between gap-3 bg-[var(--page-bg)] px-3">
       <div className="flex shrink-0 items-center gap-1">
@@ -64,9 +63,7 @@ export function Header({ onMenuClick, onThemeClick }: HeaderProps) {
         <IconButton label="Search with voice">
           <MicIcon className="size-6" />
         </IconButton>
-        <IconButton label="Toggle theme" onClick={onThemeClick}>
-          <ThemeIcon className="size-6" />
-        </IconButton>
+        <ThemeToggle />
         <button
           type="button"
           className="ml-1 hidden h-9 items-center gap-1.5 rounded-full bg-[var(--page-raised)] px-3 text-sm font-medium text-[var(--page-text)] hover:bg-[var(--page-raised-hover)] md:flex"

@@ -25,15 +25,10 @@ type WatchViewProps = {
 
 export function WatchView({ video, related, details }: WatchViewProps) {
   const router = useRouter();
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [playing, setPlaying] = useState(false);
   const [subscribed, setSubscribed] = useState(false);
   const [liked, setLiked] = useState(false);
   const [progress, setProgress] = useState(6);
-
-  useEffect(() => {
-    document.documentElement.classList.toggle("theme-light", theme === "light");
-  }, [theme]);
 
   useEffect(() => {
     if (!playing) return;
@@ -45,10 +40,7 @@ export function WatchView({ video, related, details }: WatchViewProps) {
 
   return (
     <div className="min-h-full bg-[var(--page-bg)]">
-      <Header
-        onMenuClick={() => router.push("/")}
-        onThemeClick={() => setTheme((value) => (value === "dark" ? "light" : "dark"))}
-      />
+      <Header onMenuClick={() => router.push("/")} />
 
       <main className="mx-auto grid max-w-[1400px] gap-6 px-4 py-6 lg:grid-cols-[minmax(0,1fr)_402px] lg:px-6">
         <section>
@@ -98,7 +90,7 @@ export function WatchView({ video, related, details }: WatchViewProps) {
                 className={`ml-2 h-9 rounded-full px-4 text-sm font-medium ${
                   subscribed
                     ? "bg-[var(--page-raised)] text-[var(--page-text)]"
-                    : "bg-white text-black"
+                    : "bg-[var(--page-chip-active-bg)] text-[var(--page-chip-active-text)]"
                 }`}
               >
                 {subscribed ? "Subscribed" : "Subscribe"}

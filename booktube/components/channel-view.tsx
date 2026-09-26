@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BookCover } from "@/components/book-cover";
 import { ChannelAvatar } from "@/components/channel-avatar";
 import { Header } from "@/components/header";
@@ -20,21 +20,13 @@ type ChannelViewProps = {
 
 export function ChannelView({ channel, videos }: ChannelViewProps) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [subscribed, setSubscribed] = useState(false);
   const [tab, setTab] = useState<Tab>("Home");
   const featured = videos[0];
 
-  useEffect(() => {
-    document.documentElement.classList.toggle("theme-light", theme === "light");
-  }, [theme]);
-
   return (
     <div className="min-h-full bg-[var(--page-bg)]">
-      <Header
-        onMenuClick={() => setSidebarOpen((open) => !open)}
-        onThemeClick={() => setTheme((value) => (value === "dark" ? "light" : "dark"))}
-      />
+      <Header onMenuClick={() => setSidebarOpen((open) => !open)} />
       {sidebarOpen ? (
         <button
           type="button"
@@ -79,7 +71,7 @@ export function ChannelView({ channel, videos }: ChannelViewProps) {
               className={`h-9 shrink-0 rounded-full px-4 text-sm font-medium ${
                 subscribed
                   ? "bg-[var(--page-raised)] text-[var(--page-text)]"
-                  : "bg-white text-black"
+                  : "bg-[var(--page-chip-active-bg)] text-[var(--page-chip-active-text)]"
               }`}
             >
               {subscribed ? "Subscribed" : "Subscribe"}
