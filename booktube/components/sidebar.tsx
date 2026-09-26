@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Link from "next/link";
 import { ChannelAvatar } from "@/components/channel-avatar";
 import {
   ClassicsIcon,
@@ -70,7 +71,8 @@ export function Sidebar({ open, activeItem, onNavigate }: SidebarProps) {
               icon={<item.icon className="size-6 shrink-0" />}
               active={activeItem === item.id}
               compact={!open}
-              onClick={() => onNavigate(item.id, item.id === "Home" ? "All" : undefined)}
+              href={item.id === "Home" ? "/" : undefined}
+            onClick={() => onNavigate(item.id, item.id === "Home" ? "All" : undefined)}
             />
           ))}
         </div>
@@ -105,16 +107,16 @@ export function Sidebar({ open, activeItem, onNavigate }: SidebarProps) {
 
         <SectionLabel compact={!open}>Subscriptions</SectionLabel>
         <div className="flex flex-col gap-0.5">
-          {SUBSCRIPTIONS.map((channel) => (
-            <NavButton
-              key={channel.id}
-              label={channel.name}
-              icon={<ChannelAvatar channelId={channel.id as ChannelId} className="size-6" />}
-              active={activeItem === channel.name}
-              compact={!open}
-              onClick={() => onNavigate(channel.name)}
-            />
-          ))}
+        {SUBSCRIPTIONS.map((channel) => (
+          <NavButton
+            key={channel.id}
+            label={channel.name}
+            icon={<ChannelAvatar channelId={channel.id as ChannelId} className="size-6" />}
+            active={activeItem === channel.name}
+            compact={!open}
+            href={`/channel/${channel.id}`}
+          />
+        ))}
         </div>
       </nav>
     </aside>
@@ -145,27 +147,41 @@ function NavButton({
   active,
   compact,
   onClick,
+  href,
 }: {
   label: string;
   icon: ReactNode;
   active: boolean;
   compact: boolean;
-  onClick: () => void;
+  onClick?: () => void;
+  href?: string;
 }) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={`flex w-full items-center text-left text-[14px] text-[#f1f1f1] hover:bg-[#272727] ${
-        compact
-          ? "h-[74px] flex-col justify-center gap-1.5 rounded-xl px-1 text-[10px]"
-          : "h-10 gap-6 rounded-full px-3"
-      } ${active ? "bg-[#272727] font-medium" : "font-normal"}`}
-    >
+  const className = `flex w-full items-center text-left text-[14px] text-[#f1f1f1] hover:bg-[#272727] ${
+    compact
+      ? "h-[74px] flex-col justify-center gap-1.5 rounded-xl px-1 text-[10px]"
+      : "h-10 gap-6 rounded-full px-3"
+  } ${active ? "bg-[#272727] font-medium" : "font-normal"}`;
+
+  const content = (
+    <>
       {icon}
       <span className={compact ? "line-clamp-2 text-center leading-tight" : "truncate"}>
         {label}
       </span>
+    </>
+  );
+
+  if (href) {
+    return (
+      <Link href={href} className={className} onClick={onClick}>
+        {content}
+      </Link>
+    );
+  }
+
+  return (
+    <button type="button" onClick={onClick} className={className}>
+      {content}
     </button>
   );
 }

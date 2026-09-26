@@ -47,7 +47,7 @@ export function VideoGrid({ videos, activeFilter, onFilterChange }: VideoGridPro
   );
 }
 
-function VideoCard({ video }: { video: Video }) {
+export function VideoCard({ video }: { video: Video }) {
   return (
     <article className="group">
       <Link href={`/watch/${video.id}`} className="block">
@@ -57,19 +57,28 @@ function VideoCard({ video }: { video: Video }) {
             {video.duration}
           </span>
         </div>
-        <div className="mt-3 flex gap-3">
+      </Link>
+      <div className="mt-3 flex gap-3">
+        <Link href={`/channel/${video.channelId}`} aria-label={`${video.channel} channel`}>
           <ChannelAvatar channelId={video.channelId} />
-          <div className="min-w-0">
+        </Link>
+        <div className="min-w-0">
+          <Link href={`/watch/${video.id}`}>
             <h3 className="line-clamp-2 text-[16px] font-medium leading-5 text-[var(--page-text)]">
               {video.title}
             </h3>
-            <p className="mt-1 truncate text-sm text-[var(--page-muted)]">{video.channel}</p>
-            <p className="truncate text-sm text-[var(--page-muted)]">
-              {video.views} • {video.published}
-            </p>
-          </div>
+          </Link>
+          <Link
+            href={`/channel/${video.channelId}`}
+            className="mt-1 block truncate text-sm text-[var(--page-muted)] hover:text-[var(--page-text)]"
+          >
+            {video.channel}
+          </Link>
+          <p className="truncate text-sm text-[var(--page-muted)]">
+            {video.views} • {video.published}
+          </p>
         </div>
-      </Link>
+      </div>
     </article>
   );
 }

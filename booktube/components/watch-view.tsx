@@ -80,9 +80,16 @@ export function WatchView({ video, related, details }: WatchViewProps) {
 
           <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-center gap-3">
-              <ChannelAvatar channelId={video.channelId} className="size-10" />
+              <Link href={`/channel/${video.channelId}`} aria-label={`${video.channel} channel`}>
+                <ChannelAvatar channelId={video.channelId} className="size-10" />
+              </Link>
               <div>
-                <p className="text-sm font-medium text-[var(--page-text)]">{video.channel}</p>
+                <Link
+                  href={`/channel/${video.channelId}`}
+                  className="text-sm font-medium text-[var(--page-text)] hover:underline"
+                >
+                  {video.channel}
+                </Link>
                 <p className="text-xs text-[var(--page-muted)]">{details.subscribers}</p>
               </div>
               <button
@@ -163,23 +170,30 @@ export function WatchView({ video, related, details }: WatchViewProps) {
 
         <aside className="flex flex-col gap-3">
           {related.map((item) => (
-            <Link key={item.id} href={`/watch/${item.id}`} className="flex gap-2">
-              <div className="relative aspect-video w-40 shrink-0 overflow-hidden rounded-lg bg-[#111]">
+            <div key={item.id} className="flex gap-2">
+              <Link href={`/watch/${item.id}`} className="relative aspect-video w-40 shrink-0 overflow-hidden rounded-lg bg-[#111]">
                 <BookCover bookId={item.bookId} title={item.bookTitle} />
                 <span className="absolute bottom-1 right-1 rounded bg-black/85 px-1 text-[10px] text-white">
                   {item.duration}
                 </span>
-              </div>
+              </Link>
               <div className="min-w-0">
-                <h3 className="line-clamp-2 text-sm font-medium leading-5 text-[var(--page-text)]">
-                  {item.title}
-                </h3>
-                <p className="mt-1 truncate text-xs text-[var(--page-muted)]">{item.channel}</p>
+                <Link href={`/watch/${item.id}`}>
+                  <h3 className="line-clamp-2 text-sm font-medium leading-5 text-[var(--page-text)]">
+                    {item.title}
+                  </h3>
+                </Link>
+                <Link
+                  href={`/channel/${item.channelId}`}
+                  className="mt-1 block truncate text-xs text-[var(--page-muted)] hover:text-[var(--page-text)]"
+                >
+                  {item.channel}
+                </Link>
                 <p className="truncate text-xs text-[var(--page-muted)]">
                   {item.views} · {item.published}
                 </p>
               </div>
-            </Link>
+            </div>
           ))}
         </aside>
       </main>
